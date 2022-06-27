@@ -1,0 +1,96 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}	
+
+		
+	<div class="all-title-box" >
+		<div class="container text-center">
+			<h1>Dear Member<span class="m_1">You can reach your profile detail here...</span></h1>
+		</div>
+	</div>
+	
+    <div id="contact" class="section wb">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3 style="color: brown;">Welcome {{page_user | title}}</h3>
+            </div><!-- end title -->
+            <section class="h-100 gradient-custom-2">
+              <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col col-lg-9 col-xl-7">
+                    <div class="card">
+                      <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+                        <div class="ms-4 mt-5 d-flex flex-column m-3" style="width: 150px;">
+                          {% if page_user.profile_pic %}
+                          <img src="{{page_user.profile_pic.url}}"
+                          alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                          style="width: 150px; z-index: 1">
+                          {% else %}
+                          <img src="{% static 'images/default.png' %}"
+                          alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                          style="width: 150px; z-index: 1">
+                          {% endif %}
+                        </div>
+                        <div class="ms-3" style="margin-top: 130px;">
+                          <h2 style="color: #f8f9fa;">{{page_user.user.first_name | title}} {{ page_user.user.last_name | upper }}</h5>
+                        </div>
+                      </div>
+                      <div class="card-body p-4 text-black mt-5">
+                        <div class="mb-5">
+                          <p class="lead fw-normal mb-1 ">About</p>
+                          <div class="p-4" style="background-color: #f8f9fa;">
+                            <p class="font-italic mb-1">{{page_user.bio}}</p>
+                            <ul class="list-group list-group-flush rounded-3">
+                              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fa fa-globe fa-lg"></i>
+                                
+                                {% if page_user.linkedin_url %}
+                                <p class="mb-0">{{page_user.website_url}}</p>
+                                {% else %}
+                                <p class="mb-0"></p>
+                                {% endif %}
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fa fa-github fa-lg" style="color: #333333;"></i>
+                                
+                                {% if page_user.linkedin_url %}
+                                <p class="mb-0">{{page_user.github_url}}</p>
+                                {% else %}
+                                <p class="mb-0"></p>
+                                {% endif %}
+                              </li>
+                              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fa fa-linkedin fa-lg" style="color: #55acee;"></i>
+                                
+                                {% if page_user.linkedin_url %}
+                                <p class="mb-0">{{page_user.linkedin_url}}</p>
+                                {% else %}
+                                <p class="mb-0"></p>
+                                {% endif %}
+                                  
+                                
+                              </li>
+                             
+                             
+                            </ul>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+        </div><!-- end container -->
+    </div><!-- end section -->
+    
+	
+	
+
+{% endblock content %}
+
+

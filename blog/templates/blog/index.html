@@ -1,0 +1,65 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+
+{% block content %}
+	
+	
+	
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Blog<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+    <div id="overviews" class="section wb">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-8 offset-md-2">
+                    <p class="lead">Lorem Ipsum dolroin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem!</p>
+                </div>
+            </div><!-- end title -->
+
+            <hr class="invis"> 
+			
+			
+			<div class="row"> 
+				{% for post in posts %}
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <div class="blog-item">
+						<div class="image-blog">
+							<img src='{{ post.image.url }}' alt="blogImage" class="img-fluid" style="height: 162px;overflow: hidden;">
+						</div>
+						<div class="meta-info-blog">
+							<span><i class="fa fa-calendar"></i> {{post.last_updated | date:'d M Y'}} </span>
+                            <span><i class="fa fa-heart"></i> {{ post.total_likes }} Like </span>
+                            <span><i class="fa fa-comments"></i> {{ post.total_comments}} Comments</span>
+						</div>
+						<div class="blog-title mt-3">
+							<h5>AUTHOR ||  <span style="color: #eea412;">{{post.author.first_name | title}} {{ post.author.last_name | upper }}</span></h5>
+						</div>
+						<div class="blog-title">
+							<h2><a href="#" title="">{{post.title | title}}</a></h2>
+						</div>
+						<div class="blog-desc" style="min-height: 200px;">
+							<p>{{ post.content | truncatewords:40 | capfirst | safe }}</p>
+						</div>
+						<div class="blog-button">
+							<a class="hover-btn-new orange" href="{% url 'detail' post.pk %}"><span>Read More<span></a>
+						</div>
+					</div>
+                </div><!-- end col -->
+				{% endfor %}
+            </div><!-- end row -->
+			
+				
+            
+
+        
+
+          
+        </div><!-- end container -->
+    </div><!-- end section -->
+
+
+	{% endblock content %}

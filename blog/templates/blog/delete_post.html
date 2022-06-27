@@ -1,0 +1,66 @@
+{% extends 'partials/base.html' %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}	
+
+		
+	<div class="all-title-box" >
+		<div class="container text-center">
+			<h1>Contact<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+    <div id="contact" class="section wb">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3 style="color: brown;">Dangerous Area</h3>
+                <h3>{{ post.title }}</h3>
+            </div><!-- end title -->
+
+            <div class="row ">
+                <div class="col-xl-6 col-md-12 col-sm-12">
+                    <div class="contact_form">
+                        <div id="message"></div>
+                        
+                        <form  method="POST" style="color: azure; text-align: center;" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          <h3 style="color: azure;">Are you sure you want to do this?</h3> 
+                          <div class="text-center pd">
+                            <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Delete Post</button>
+                        </div>
+                        
+                        </form>
+                    </div>
+                </div><!-- end col -->
+				<div class="col-xl-6 col-md-12 col-sm-12">
+					<div class="blog-item">
+						<div class="image-blog">
+							<img src='{{ post.image.url }}' alt="blogImage" class="img-fluid" style="height: 162px;overflow: hidden;">
+						</div>
+						<div class="meta-info-blog">
+							<span><i class="fa fa-calendar"></i> {{post.last_updated | date:'d M Y'}} </span>
+                            <span><i class="fa fa-heart"></i> Like </span>
+                            <span><i class="fa fa-comments"></i> 12 Comments</span>
+						</div>
+						<div class="blog-title mt-3">
+							<h5>AUTHOR ||  <span>{{post.author.first_name | title}} {{ post.author.last_name | upper }}</span></h5>
+						</div>
+						<div class="blog-title">
+							<h2><a href="#" title="">{{post.title | title}}</a></h2>
+						</div>
+						<div class="blog-desc" style="min-height: 200px;">
+							<p>{{ post.content | truncatewords:40 | capfirst}}</p>
+						</div>
+						<div class="blog-button">
+							<a class="hover-btn-new orange" href="{% url 'detail' post.pk %}"><span>Read More<span></a>
+						</div>
+					</div>
+				</div>
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+	
+	
+
+{% endblock content %}

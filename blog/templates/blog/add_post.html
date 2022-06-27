@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %}
+
+
+{% block content %}
+{% load crispy_forms_tags %}	
+
+		
+	<div class="all-title-box" >
+		<div class="container text-center">
+			<h1>Contact<span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span></h1>
+		</div>
+	</div>
+	
+    <div id="contact" class="section wb">
+        <div class="container">
+            <div class="section-title text-center">
+                <h3>Add Blog Post</h3>
+            </div><!-- end title -->
+
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="contact_form">
+                        <div id="message"></div>
+                        
+                        <form  method="POST" style="color: azure;" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          {{ form.media }}
+                          {{ form | crispy }}  
+                          <div class="text-center pd">
+                            <button type="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block">Add Your Post</button>
+                        </div>
+                        
+                        </form>
+                        
+                    </div>
+                </div><!-- end col -->
+				
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end section -->
+	
+	
+
+{% endblock content %}

@@ -1,0 +1,118 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<body class="host_version"> 
+
+	<!-- Modal -->
+	
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		  <div class="modal-content">
+			  <div class="modal-header tit-up">
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h4 class="modal-title">Blogger Login</h4>
+			  </div>
+			  <div class="modal-body customer-box">
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs">
+					  <li><a class="active" href="#Login" data-toggle="tab">Login</a></li>
+					  <li><a href="#Registration" data-toggle="tab">Registration</a></li>
+				  </ul>
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+					  <div class="tab-pane active" id="Login">
+						  <form role="form" class="form-horizontal" method="POST">
+                            {% csrf_token %}
+                            {{ loginform | crispy }}
+							  <div class="row">
+								  <div class="col-sm-10">
+									  <button type="submit" name="loginform" class="btn btn-light btn-radius btn-brd grd1">
+										  Submit
+									  </button>
+								  </div>
+							  </div>
+						  </form>
+					  </div>
+					  <div class="tab-pane" id="Registration">
+						  <form role="form" class="form-horizontal" method="POST">
+							  
+							{% csrf_token %}
+                            {{ registerform | crispy }}
+							  
+							  <div class="row">							
+								  <div class="col-sm-10">
+									  <button type="submit" name="registerform" class="btn btn-light btn-radius btn-brd grd1">
+										  Save &amp; Continue
+									  </button>
+								  </div>
+							  </div>
+						  </form>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+		</div>
+	  </div>
+
+
+		
+
+    <!-- LOADER -->
+	<div id="preloader">
+		<div class="loader-container">
+			<div class="progress-br float shadow">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOADER -->	
+
+    <!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{% url 'index' %}">
+					<img src="{% static 'images/logo.png' %}" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-host">
+					<ul class="navbar-nav ml-auto">
+						{% if request.user.is_authenticated %} {% if request.user.is_superuser %}
+						<li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
+						{% endif %}
+						<li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'add_post' %}">New Post</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">{{request.user.username}} </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="{% url 'profile' %}">Edit Settings </a>
+									
+								{% if user.userprofile.id %}		
+								<a class="dropdown-item" href="{% url 'showprofile' user.userprofile.id %}">Profile </a>
+								<a class="dropdown-item" href="{% url 'edit_profile_page' user.userprofile.id%}">Edit Profile </a>
+								{% else %}
+								<a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile </a>
+								{% endif %}
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+
+						{% else %}
+						<li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log" href="#" data-toggle="modal" data-target="#login"><span>Write Now</span></a></li>
+                    </ul>
+					{% endif %}
+					
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
